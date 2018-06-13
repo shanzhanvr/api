@@ -118,7 +118,7 @@ class MerchantController extends BaseController {
         unset($searchData['token']);
         $searchData['accountId'] = $user->account->id;
         $bls = new RechargeBls();
-        $recharge = $bls->getMerchantByList($searchData);
+        $recharge = $bls->getRechangeByList($searchData);
         return JsonResponse::success(['object'=>$recharge]);
     }
 }
