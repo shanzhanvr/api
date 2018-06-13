@@ -115,7 +115,7 @@ class MerchantController extends BaseController {
     public function getMerchantList() {
         $user = JWTAuth::parseToken()->authenticate();
         $searchData = Input::all();
-        unset($searchData['token']);
+        unset($searchData['token']);  unset($searchData['s']);
         $searchData['accountId'] = $user->account->id;
         $bls = new RechargeBls();
         $recharge = $bls->getRechangeByList($searchData);
