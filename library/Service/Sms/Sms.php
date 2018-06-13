@@ -6,23 +6,24 @@
  *
  * 2017/11/30
  */
-namespace library\Service\ApiSendMessage;
+namespace library\Service\Sms;
 use library\Service\Contst\Api\SendMessageApiConst;
 use library\Service\ApiSendMessage\SignatureHelper;
+use library\Service\Contst\Sms\SmsConst;
 use Mockery\Exception;
 
 /**
  * 发送短信
  */
 
-class SendMessage {
+class Sms {
 
    public  static function sendSm($phone,$num) {
         $params = array ();
         // *** 需用户填写部分 ***
         $params["PhoneNumbers"] =$phone;
-        $params["SignName"] = SendMessageApiConst::SIGNNAME;
-       $params["TemplateCode"] = SendMessageApiConst::getMessageTemplateCodeItem($num);
+        $params["SignName"] = SmsConst::SIGNNAME;
+       $params["TemplateCode"] = SmsConst::getMessageTemplateCodeItem($num);
         $params['TemplateParam'] = Array (
             "code" => rand(100000,999999)
         );
@@ -34,9 +35,9 @@ class SendMessage {
         $helper = new SignatureHelper();
         // 此处可能会抛出异常，注意catch
        $result = $helper->request(
-           SendMessageApiConst::ACCESSKEYID,
-           SendMessageApiConst::ACCESSKEYSECRET,
-           SendMessageApiConst::SENDMESSAGEURL,
+           SmsConst::ACCESSKEYID,
+           SmsConst::ACCESSKEYSECRET,
+           SmsConst::SENDMESSAGEURL,
            array_merge($params, array(
                    "RegionId" => "cn-hangzhou",
                    "Action" => "SendSms",

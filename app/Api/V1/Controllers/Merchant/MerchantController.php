@@ -11,6 +11,7 @@ use App\Api\V1\Bls\Merchant\Model\MerchantModel;
 use App\Api\V1\Bls\Merchant\RechargeBls;
 use App\Api\V1\Controllers\BaseController;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Log;
 use JWTAuth,Validator;
 use library\Response\JsonResponse;
 use Tymon\JWTAuth\Exceptions\JWTException;
