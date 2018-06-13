@@ -27,6 +27,7 @@ class StatusConst
     const TRADE_FAIL = 0;//充值失败
     const TRADE_ING = 1;//充值中
     const TRADE_SUCCESS = 2;//成功
+    const TRADE_ERROR = 3;//系统异常
 
     const TRADETUPE_RECHANGE=1;
     const TRADETUPE_FORWARD=2;

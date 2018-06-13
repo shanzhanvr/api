@@ -9,7 +9,7 @@ namespace App\Api\V1\Controllers;
 
 use App\Http\Controllers\Controller;
 use Dingo\Api\Routing\Helpers;
-use libiry\Response\JsonResponse;
+use library\Response\JsonResponse;
 
 
 class BaseController extends Controller {
@@ -31,5 +31,16 @@ class BaseController extends Controller {
     }
     public function error($code = 0,$message = 'error',$data = []){
         return JsonResponse::error($code,$message,$data);
+    }
+    public function getFenFormYuan($value)
+    {
+        return $value / 100;
+    }
+    public function getYuanFromFen($value)
+    {
+        return $value * 100;
+    }
+    public function getSumamount($amount,$amount2){
+        return (int)($amount+$amount2);
     }
 }

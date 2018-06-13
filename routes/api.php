@@ -14,4 +14,5 @@ use Illuminate\Http\Request;
 */
 require 'api/merchant/merchant.php';
 require 'api/authapi.php';
+require 'api/pay/pay.php';
 
