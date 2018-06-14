@@ -16,7 +16,61 @@ use Mockery\Exception;
  * 发送短信
  */
 
-class Sms {
+class Sms implements Contract {
+
+    protected $phone;
+
+    public $num;
+    /**
+     *
+     * @author:jaosn
+     * @desc:短信发送
+     *
+     * */
+    protected static $instance;
+
+    protected  $sms;
+    protected $signname;//签名
+    protected $templatecode;//模板
+    protected $outid;
+    protected $accesskeyid;
+    protected $accesskeysecret;
+    protected $domain;
+
+
+
+    public function __construct() {
+        $this->sms = new SignatureHelper();
+        $this->signname = SmsConst::SIGNNAME;
+        $this->outid = rand(10000,99999);
+        $this->accesskeyid = SmsConst::ACCESSKEYID;
+        $this->accesskeysecret = SmsConst::ACCESSKEYSECRET;
+        $this->domain = SmsConst::SENDMESSAGEURL;
+    }
+
+    public static function getInstance($options = array()) {
+        if(self::$instance == null) {
+            self::$instance = new self();
+        }
+        return self::$instance;
+    }
+
+    public function request($phone,$num) {
+        $params = $this->getFileds($phone,$num);
+        $result = $this->sms->request($this->accesskeyid,$this->accesskeysecret,$this->domain,array_merge($params,array("RegionId" => "cn-hangzhou", "Action" => "SendSms", "Version" => "2017-05-25",)));
+        $result = \helper::object2array($result);
+        return $result;
+    }
+
+    public function getFileds($phone,$num) {
+        return $params = [
+            'PhoneNumbers'=>$phone,
+            'SignName'    =>$this->signname,
+            'TemplateCode'=>SmsConst::getMessageTemplateCodeItem($num),
+            'TemplateParam'=> json_encode(array("code" => rand(100000,999999)),JSON_UNESCAPED_UNICODE),
+            'OutId'        => $this->outid,
+        ];
+    }
 
    public  static function sendSm($phone,$num) {
         $params = array ();
