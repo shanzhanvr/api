@@ -10,15 +10,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use library\Response\JsonResponse;
-use library\Service\Cache\TMMemCacheMgr;
+use library\Service\Cache\TMRedisCacheMgr;
 use library\Service\Contst\Sms\SmsConst;
 use library\Service\Sms\Sms;
 
 class SmsController extends Controller{
 
     public function smsSend(Request $request){
-        $mem = TMMemCacheMgr::getInstance();
-        var_dump($mem);exit;
         $sms = Sms::getInstance();
         //判断手机号
         if(!Input::get('mobile') || !\helper::isMobile(Input::get('mobile'))){

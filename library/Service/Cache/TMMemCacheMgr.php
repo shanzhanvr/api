@@ -131,12 +131,10 @@ class TMMemCacheMgr implements TMCacheInterface{
      * @access public
      */
     public function __destruct() {
-        if ($this->isEnable)
-        {
+        if ($this->isEnable)  {
             $persistent = $this->isPersistent;
 
-            if (!$persistent)
-            {
+            if (!$persistent)  {
                 $this->cache->close();
             }
         }
