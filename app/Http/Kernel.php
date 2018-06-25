@@ -59,7 +59,9 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'api.vrauth' => \App\Http\Middleware\ApiJwtAuth::class,
+        'api.merchant' => \App\Http\Middleware\ApiMerchantAuth::class,
+        'api.ucenter' => \App\Http\Middleware\ApiJwtUcenterAuth::class,
+        'api.jwtauth' => \App\Http\Middleware\ApiAuth::class,
         'jwt.auth' => \Tymon\JWTAuth\Http\Middleware\Check::class,
         'jwt.refresh' => \Tymon\JWTAuth\Http\Middleware\RefreshToken::class,
     ];

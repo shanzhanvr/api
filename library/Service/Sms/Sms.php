@@ -59,6 +59,7 @@ class Sms implements Contract {
         $params = $this->getFileds($phone,$num);
         $result = $this->sms->request($this->accesskeyid,$this->accesskeysecret,$this->domain,array_merge($params,array("RegionId" => "cn-hangzhou", "Action" => "SendSms", "Version" => "2017-05-25",)));
         $result = \helper::object2array($result);
+        $result['outId'] = $params['OutId'];
         return $result;
     }
 

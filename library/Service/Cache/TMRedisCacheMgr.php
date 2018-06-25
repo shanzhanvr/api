@@ -117,6 +117,28 @@ class TMRedisCacheMgr {
         }
         return intval($this->redis->get(self::formatKey($key)));
     }
+
+    /**
+     * 枷锁服务
+     *
+     * */
+    public function setLock($key, $expire=0){
+        $is_lock = $this->redis->setnx($key, time()+$expire);
+        if(!$is_lock){// 判断锁是否过期
+            $lock_time = $this->redis->get($key);// 锁已过期，删除锁，重新获取
+            if(time()>$lock_time){
+                $this->unlock($key);
+                $is_lock = $this->redis->setnx($key, time()+$expire);
+            }
+        }
+        return $is_lock? true : false;
+    }
+
+    public function unlock($key){
+        return $this->redis->del($key);
+    }
+
+
     /**
      *获取value
      *@param string $key
@@ -133,7 +155,7 @@ class TMRedisCacheMgr {
      * @param $param 格式化的字符串  serialize(json_encode($param))$timeout 超时时间
      *@return string
      */
-    public function cset($key,$param,$timeout = 0){
+    public function setex($key,$param,$timeout = 0){
         if(empty($this->redis)){
             return false;
         }
