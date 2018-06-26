@@ -28,6 +28,8 @@
  */
 namespace library\Service\Redis;
 
+use Illuminate\Support\Facades\Redis;
+
 class TMPHPRedisClientFactory extends TMRedisClientAbstractFactory {
 
     /**
