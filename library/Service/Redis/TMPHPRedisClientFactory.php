@@ -72,7 +72,7 @@ class TMPHPRedisClientFactory extends TMRedisClientAbstractFactory {
             $name = $host."_".$port;
         }
         if(!isset(self::$clientArray[$name])){
-            $redis = new \Redis();
+            $redis = new Redis();
             $redis->connect($host, $port, $timeout);
             if(!empty($auth)) {
                 $redis->auth($auth);

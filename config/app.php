@@ -214,7 +214,7 @@ return [
         'JWTFactory'=> Tymon\JWTAuth\Facades\JWTFactory::class,
         'APIRoute'  => Dingo\Api\Facade\Route::class,
         'API'       => Dingo\Api\Facade\API::class,
-        'Redis'     => Illuminate\Support\Facades\Redis::class,
+        'RedisServer'     => Illuminate\Support\Facades\Redis::class,
     ],
 
 ];
