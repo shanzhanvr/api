@@ -69,20 +69,19 @@ class TMPHPRedisClientFactory extends TMRedisClientAbstractFactory {
      * @param string $name 连接的别名
      */
     public static function  getClientForDetails($host, $port, $timeout = 0, $auth = "", $name = "") {
+        $redis = Redis::connection();
         if(empty($name)) {
             $name = $host."_".$port;
         }
         if(!isset(self::$clientArray[$name])){
-            $redis = Redis::connection();
             if(!empty($auth)) {
-                $redis->auth(($auth);
+                $redis->auth($auth);
             }
             self::$clientArray[$name] = $redis;
-        }
-        else{
+        } else{
             $redis = self::$clientArray[$name];
             try{
-                Redis::connection()->ping();
+                $redis->ping();
             }catch(\RedisException $re) {
                 $redis->connect($host, $port, $timeout);
             }
