@@ -16,5 +16,6 @@ require 'api/merchant/merchant.php';
 require 'api/authapi.php';
 require 'api/pay/pay.php';
 require 'api/common/sms/sms.php';
-require 'api/common/sms/upload.php';
+require 'api/common/upload.php';
+require 'api/common/area.php';
 

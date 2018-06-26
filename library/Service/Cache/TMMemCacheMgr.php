@@ -6,6 +6,8 @@
  * @author jason
  */
 namespace library\Service\Cache;
+use Illuminate\Cache\MemcachedStore;
+
 class TMMemCacheMgr implements TMCacheInterface{
 
     /**
@@ -118,7 +120,7 @@ class TMMemCacheMgr implements TMCacheInterface{
     protected function initialize($isEnable,$server) {
         $this->isEnable = $isEnable;
         if ($isEnable) {
-            $this->cache = new \Memcached();
+            $this->cache = new MemcachedStore(new \Memcached());
             $host = $server["host"];
             $port = empty($server["port"]) ? 11211 : (int) $server["port"];
             $this->cache->addServer($host, $port);
@@ -241,13 +243,11 @@ class TMMemCacheMgr implements TMCacheInterface{
      * @return void
      */
     public function clear($key, $alive=true) {
-        if (!$this->cache)
-        {
+        if (!$this->cache) {
             return false;
         }
         $delete_result = $this->cache->delete($key);
-        if ($alive)
-        {
+        if ($alive)  {
             return $this->clearAlive($key);
         } else {
             return $delete_result;
@@ -262,8 +262,7 @@ class TMMemCacheMgr implements TMCacheInterface{
      * @return void
      */
     public function clearAlive($key) {
-        if (!$this->cache)
-        {
+        if (!$this->cache)  {
             return false;
         }
         return $this->cache->delete("__ALIVE__" . $key);
