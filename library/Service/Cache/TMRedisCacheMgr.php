@@ -6,7 +6,7 @@
  * @author jason
  */
 namespace library\Service\Cache;
-use library\Service\Redis\TMPHPRedisClientFactory;
+use library\Service\RedisServer\TMPHPRedisClientFactory;
 
 class TMRedisCacheMgr {
 

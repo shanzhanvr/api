@@ -26,9 +26,8 @@
  * @author  ianzhang <jasonmark@yeah.net>
  * @version $Id: TMPHPRedisClientFactory.class.php 2101 2012-11-01 10:04:01Z ianzhang $
  */
-namespace library\Service\Redis;
+namespace library\Service\RedisServer;
 
-use Illuminate\Support\Facades\Redis;
 
 class TMPHPRedisClientFactory extends TMRedisClientAbstractFactory {
 
@@ -72,7 +71,7 @@ class TMPHPRedisClientFactory extends TMRedisClientAbstractFactory {
             $name = $host."_".$port;
         }
         if(!isset(self::$clientArray[$name])){
-            $redis = new Redis();
+            $redis = new \Redis();
             $redis->connect($host, $port, $timeout);
             if(!empty($auth)) {
                 $redis->auth($auth);

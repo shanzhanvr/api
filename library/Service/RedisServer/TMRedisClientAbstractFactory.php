@@ -27,7 +27,7 @@
  * @author  ianzhang <jasonmark@yeah.net>
  * @version $Id: TMRedisClientAbstractFactory.class.php 2110 2012-11-02 07:50:19Z ianzhang $
  */
-namespace library\Service\Redis;
+namespace library\Service\RedisServer;
 abstract class TMRedisClientAbstractFactory {
     /**
      *
