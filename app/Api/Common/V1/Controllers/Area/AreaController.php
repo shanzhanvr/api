@@ -20,9 +20,8 @@ class AreaController extends Controller{
      * 地区联动
      */
     public function getArea(Request $request) {
+
         $tmem = TMMemCacheMgr::getInstance();
-        echo $tmem->set('name','wujunjun');
-        exit;
         if ($request->isMethod('post')) {
             return AreaModel::where('superiorId',$request->get('suid'))->get();
         }

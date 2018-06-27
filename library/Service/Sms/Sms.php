@@ -69,7 +69,7 @@ class Sms implements Contract {
             'PhoneNumbers'=>$phone,
             'SignName'    =>$this->signname,
             'TemplateCode'=>SmsConst::getMessageTemplateCodeItem($num),
-            'TemplateParam'=> json_encode(array("code" => rand(100000,999999)),JSON_UNESCAPED_UNICODE),
+            'TemplateParam'=> json_encode(array("code" => rand(10000,99999)),JSON_UNESCAPED_UNICODE),
             'OutId'        => $this->outid,
         ];
     }

@@ -6,7 +6,9 @@
  * @author jason
  */
 namespace library\Service\Cache;
-use Illuminate\Cache\MemcachedStore;
+
+
+use Illuminate\Support\Facades\Cache;
 
 class TMMemCacheMgr implements TMCacheInterface{
 
@@ -120,10 +122,9 @@ class TMMemCacheMgr implements TMCacheInterface{
     protected function initialize($isEnable,$server) {
         $this->isEnable = $isEnable;
         if ($isEnable) {
-            $this->cache = new MemcachedStore(new \Memcached());
+            $this->cache = Cache::store('memcached');
             $host = $server["host"];
             $port = empty($server["port"]) ? 11211 : (int) $server["port"];
-            $this->cache->addServer($host, $port);
         }
     }
 
