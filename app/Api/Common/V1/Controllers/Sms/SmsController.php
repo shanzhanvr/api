@@ -39,7 +39,7 @@ class SmsController extends Controller{
         }
         $result = $sms->request(Input::get('mobile'),Input::get('action'));
         $redis->setex(Input::get('mobile'),serialize($result['Code']),60);
-        Logsms::create(['smsPhoneNumber'=>$mobile,'smsReturnCode'=>json_encode($result),'smsCode'=>$result['outId'],'ip'=>\helper::getClientIp()]);
+        Logsms::create(['smsPhoneNumber'=>$mobile,'smsReturnCode'=>base64_encode(json_encode($result)),'smsCode'=>$result['outId'],'ip'=>\helper::getClientIp()]);
         return JsonResponse::success(['Message'=>$result['Message'],'Code'=>$result['Code'],'smsCode'=>$result['outId']]);
     }
 }
