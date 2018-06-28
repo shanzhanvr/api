@@ -106,6 +106,7 @@ class LeanTongBaoPayController extends BaseController {
     public function receivePay(){
         $responseData = file_get_contents('php://input');
         if (!empty($responseData)) {
+            $this->blog->log('receivepay','支付接口回调解密前的报文:' . $responseData);
             $responseData = json_decode($responseData, true);
             if (isset($responseData['appId']) && env('LEARNING_PAYAPPID') == $responseData['appId']) {
                 $applyPay = new Apply();
