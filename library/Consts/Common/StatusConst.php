@@ -10,19 +10,8 @@ class StatusConst
     const BLOCKED_DESC = '是';
     const ENABLED_DESC = '否';
 
-    //账户中心
-    const CODE_STATUS = 1; //验证码失效
-    const CODE_SATUS = 2;  //验证码不相同
-    const CODE_RECODES = 3; //用户记录
-    const CODE_USERSTATUS = 1;  //用户状态
-    const CODE_USERCOOD = 4;  //用户账户被冻结
-    const CODE_USERAUTH= 6;   //用户认证
-    const CODE_USERMONEY = 5;  //用户提现金额不足
-    const CODE_USERPAY = 1;  //支付宝提现方式
-    const CODE_USERPAYBANK = 2;  //网银提现方式
-    const CODE_USERPAYING = 1;  ////提现中
-    const CODE_WEIXINPAY = 1;     //微信充值
-    const CODE_ALIPAY = 2;     //支付宝充值
+
+
 
     const TRADE_FAIL = 0;//充值失败
     const TRADE_ING = 1;//充值中

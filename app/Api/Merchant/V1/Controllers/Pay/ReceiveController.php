@@ -19,6 +19,7 @@ use library\Response\JsonResponse;
 use library\Service\Contst\Common\RechangeConst;
 use library\Service\Contst\Common\StatusConst;
 use library\Service\Contst\Pay\PayConst;
+use library\Service\Log\BLog;
 use library\Service\Pay\Apply;
 use library\Service\Pay\Tools\Aes;
 use library\Service\Pay\Tools\Rsa;
@@ -26,9 +27,12 @@ use Validator,JWTAuth;
 
 class  ReceiveController extends BaseController {
 
+    protected $body;
+    protected $blog;
     public function __construct() {
         parent::__construct();
         $this->body = env('MERCHANT_PAY_BODY');
+        $this->blog = BLog::get_instance();
     }
     //支付回调接口
     public function receivePay(){

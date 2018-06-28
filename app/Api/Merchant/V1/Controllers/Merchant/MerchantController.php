@@ -11,6 +11,7 @@ use App\Api\Merchant\V1\Bls\Model\MerchantModel;
 use App\Api\Merchant\V1\Bls\RechargeBls;
 use App\Api\Merchant\V1\Controllers\BaseController;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Log;
 use JWTAuth,Validator;
 use library\Response\JsonResponse;
 use Tymon\JWTAuth\Exceptions\JWTException;
@@ -59,6 +60,7 @@ class MerchantController extends BaseController {
         ];
         try {
             $token = JWTAuth::attempt($payload);
+            Log::info(json_encode($token));
             if (!$token) {
                 return JsonResponse::error(0,'用户名或密码错误',[]);
             }
