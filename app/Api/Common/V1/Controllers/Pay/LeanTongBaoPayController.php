@@ -21,6 +21,7 @@ use library\Service\Contst\Common\TradeTypeConst;
 use library\Service\Contst\Pay\PayConst;
 use library\Service\Log\BLog;
 use library\Service\Pay\Apply;
+use library\Service\Pay\Tools\Aes;
 use library\Service\Pay\Tools\Rsa;
 use Validator,JWTAuth;
 
