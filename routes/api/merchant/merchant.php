@@ -8,7 +8,7 @@
 
 $api = app('Dingo\Api\Routing\Router');
 $api->version('v1', function ($api) {
-    $api->group(['namespace' => 'App\Api\merchant\V1\Controllers\Merchant','middleware' => ['api.merchant']],function ($api) {
+    $api->group(['namespace' => 'App\Api\Merchant\V1\Controllers\Merchant','middleware' => ['api.merchant']],function ($api) {
         //商户登录注册接口无需验证token
         $api->post('merchant/login', 'MerchantController@login');
         $api->post('merchant/register', 'MerchantController@register');
