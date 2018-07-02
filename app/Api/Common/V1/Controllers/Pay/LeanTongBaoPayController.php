@@ -133,8 +133,7 @@ class LeanTongBaoPayController extends BaseController {
                         $tradeModel->save();
                         if ($data['respCode'] == '0000') {
                             $accountModel = AccountModel::find($rechangeModel->accountId);
-                            $accountModel->blance = $this->getSumamount($this->getYuanFromFen($data['amount']), $accountModel->blance);
-//                            $accountModel->amount = $this->getSumamount($this->getYuanFromFen($data['amount']), $accountModel->amount);
+                            $accountModel->blance = $this->getSumamount($this->getYuanFromFen($data['amount']), !empty($accountModel->blance)?$accountModel->blance:0);
                             $accountModel->save();
                         }
                         DB::commit();
