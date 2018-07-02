@@ -65,8 +65,8 @@ class LeanTongBaoPayController extends BaseController {
                 //产生预支付订单
                 $rechange = new RechargeModel();
                 $rechange->merchantId = $user->id;
-                $account = AccountModel::query()->where('merchantId', $rechange->merchantId)->first();
-                $rechange->accountId = 2;
+                $account = AccountModel::query()->where('merchantId', $user->id)->first();
+                $rechange->accountId = $account->id;
                 $rechange->amount = $this->getYuanFromFen($input['amount']);
                 $rechange->rechargeType = $input['rechargeType'];
                 $rechange->rechargeSerialNo = $payData['merchantOrderNo'];
@@ -133,11 +133,7 @@ class LeanTongBaoPayController extends BaseController {
                         $tradeModel->save();
                         if ($data['respCode'] == '0000') {
                             $accountModel = AccountModel::find($rechangeModel->accountId);
-                            if(empty($accountModel->blance)){
-                                $accountModel->blance = $this->getYuanFromFen($data['amount']);
-                            }else{
-                                $accountModel->blance = $this->getSumamount($this->getYuanFromFen($data['amount']), $accountModel->blance);
-                            }
+                            $accountModel->blance = $this->getSumamount($this->getYuanFromFen($data['amount']), $accountModel->blance);
                             $accountModel->save();
                         }
                         DB::commit();
