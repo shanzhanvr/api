@@ -42,4 +42,5 @@ class UploadController extends Controller {
 //        $base64_1 = str_replace($result[1],'', $base64_img);
     }
 
+
 }

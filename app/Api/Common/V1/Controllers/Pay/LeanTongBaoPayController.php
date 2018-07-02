@@ -82,9 +82,9 @@ class LeanTongBaoPayController extends BaseController {
                 $recode->recodeSerialNo = $payData['merchantOrderNo'];
                 $recode->outTradeNo = $payData['tradeOrderNo'];
                 $recode->preBlance = $account->blance;
-                $recode->blance = $account->blance + $this->getYuanFromFen($input['amount']);
+                $recode->blance = (int)($account->blance + $this->getYuanFromFen($input['amount']));
                 $recode->preAmount = $account->amount;//变动前可提现金额
-                $recode->amount = $account->amount;//变动后可现金额
+                //$recode->amount = (int)($account->amount + $this->getYuanFromFen($input['amount']));//变动后可现金额  //充值的钱不可提现
                 $recode->tradeaMount = $this->getYuanFromFen($input['amount']);
                 $recode->status = RechangeConst::RECHANGE_ACTION_STATUCT_ING;
                 $recode->ip = \helper::getClientIp();
@@ -134,6 +134,7 @@ class LeanTongBaoPayController extends BaseController {
                         if ($data['respCode'] == '0000') {
                             $accountModel = AccountModel::find($rechangeModel->accountId);
                             $accountModel->blance = $this->getSumamount($this->getYuanFromFen($data['amount']), $accountModel->blance);
+//                            $accountModel->amount = $this->getSumamount($this->getYuanFromFen($data['amount']), $accountModel->amount);
                             $accountModel->save();
                         }
                         DB::commit();

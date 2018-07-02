@@ -157,4 +157,16 @@ class helper {
         }
         return $factory->make($view, $data, $mergeData);
     }
+    /*
+     * $type : 1 年 2 月
+     * $num 值
+     * */
+    public static function getNextTime($type = 1,$num = 1){
+        $nowtime = date('Y-m-d H:i:s');
+        if($type == 1){
+            return date("Y-m-d H:i:s",strtotime("+".$num."years",strtotime($nowtime)));
+        }elseif($type == 2){
+           return date("Y-m-d H:i:s",strtotime("+".$num."months",strtotime($nowtime)));
+        }
+    }
 }
