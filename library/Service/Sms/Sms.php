@@ -7,8 +7,6 @@
  * 2017/11/30
  */
 namespace library\Service\Sms;
-use library\Service\Contst\Api\SendMessageApiConst;
-use library\Service\ApiSendMessage\SignatureHelper;
 use library\Service\Contst\Sms\SmsConst;
 use Mockery\Exception;
 

@@ -13,11 +13,13 @@ class ProductConst{
     const TICKET = 2;//票务
     const CATES = 3;//餐饮
     const HOMESTAY = 4;//民宿
+    const  HOURSE= 5;//房产
 
     const HOTEL_DESC = '酒店';
     const TICKET_DESC = '票务';
     const CATES_DESC = '餐饮';
     const HOMESTAY_DESC = '民宿';
+    const  HOURSE_DESC= '房产';//房产
 
     const ADULT = 1;//成人
     const STUDENT = 2;//学生

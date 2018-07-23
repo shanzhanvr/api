@@ -1,6 +1,5 @@
 <?php
-namespace library\Service\ApiSendMessage;
-
+namespace library\Service\Sms;
 /**
  * 签名助手 2017/11/19
  *
