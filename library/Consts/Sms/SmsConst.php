@@ -9,9 +9,9 @@ namespace library\Service\Contst\Sms;
 class SmsConst{
 
     //短信验证ID
-    const ACCESSKEYID = 'LTAIlQPsjjPfOMxo';
+    const ACCESSKEYID = 'LTAIvBU9IHacSpvx';
     //秘钥
-    const ACCESSKEYSECRET =  'QBaqybcsuGluxvi1F95DWloykosMen';
+    const ACCESSKEYSECRET =  'HzQgVNq1IhWObQ54PwMkhhCFGvuLJP';
     //地址
     const SENDMESSAGEURL = 'dysmsapi.aliyuncs.com';
     //签名
@@ -23,11 +23,11 @@ class SmsConst{
     //身份信息认证
     const IDCARD_CERTIFICATION = '3';
 
-    const MESSAGEUPDATE_CERTIFICATION_DESC = 'SMS_136025376';
+    const MESSAGEUPDATE_CERTIFICATION_DESC = 'SMS_140070301';
 
-    const REGISTER_CERTIFICATION_DESC = 'SMS_136045392';
+    const REGISTER_CERTIFICATION_DESC = 'SMS_140015247';
 
-    const IDCARD_CERTIFICATION_DESC = 'SMS_135793091';
+    const IDCARD_CERTIFICATION_DESC = 'SMS_140035284';
 
     const MEMCACHECAPTCHA_KEY = 'SHANZHANVR_CAPTCHA';
 
