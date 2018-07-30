@@ -5,7 +5,7 @@
  * Date: 2018/6/27
  * Time: 17:55
  */
-namespace App\Api\Common\V1\Controllers\Pay;
+namespace App\Api\Merchant\V1\Controllers\Merchant\Pay;
 
 use App\Api\BaseController;
 use App\Api\Merchant\V1\Bls\Model\AccountModel;
@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rule;
 use library\Response\JsonResponse;
+use library\Service\Cache\TMRedisCacheMgr;
 use library\Service\Contst\Common\RechangeConst;
 use library\Service\Contst\Common\TradeTypeConst;
 use library\Service\Contst\Pay\PayConst;
@@ -25,7 +26,7 @@ use library\Service\Pay\Tools\Aes;
 use library\Service\Pay\Tools\Rsa;
 use Validator,JWTAuth;
 
-class LeanTongBaoPayController extends BaseController {
+class RechangePayController extends BaseController {
 
     protected $body;
     protected $blog;
@@ -34,10 +35,15 @@ class LeanTongBaoPayController extends BaseController {
         $this->body = env('MERCHANT_PAY_BODY');
         $this->blog = BLog::get_instance();
     }
-
     //下单接口
     public function alipayPay(){
         $input = Input::all();
+        $user = JWTAuth::parseToken()->authenticate();
+        $redis = TMRedisCacheMgr::getInstance();
+        //调用枷锁服务
+        if(!$redis->setLock($user->mobile,2)){
+            return JsonResponse::error(0,'请勿频繁访问');
+        }
         $validator = Validator::make(
             $input,
             ['amount' => 'required|Numeric', 'rechargeType' => 'required|'.Rule::in(RechangeConst::desc())],
@@ -53,7 +59,7 @@ class LeanTongBaoPayController extends BaseController {
         } elseif ($input['rechargeType'] == 2) {
             $rechargeType = PayConst::alipay;
         }
-        $user = JWTAuth::parseToken()->authenticate();
+
         $applyPay = new Apply();
         $this->blog->log('merchant_'.$user->mobile,'-----start---发起的支付----参数'.json_encode(Input::all()));
         $response = $applyPay::unifiedOrder(\helper::getOrderno(), $input['amount'], $this->body, $rechargeType);
@@ -84,7 +90,6 @@ class LeanTongBaoPayController extends BaseController {
                 $recode->preBlance = $account->blance;
                 $recode->blance = (int)($account->blance + $this->getYuanFromFen($input['amount']));
                 $recode->preAmount = $account->amount;//变动前可提现金额
-                //$recode->amount = (int)($account->amount + $this->getYuanFromFen($input['amount']));//变动后可现金额  //充值的钱不可提现
                 $recode->tradeaMount = $this->getYuanFromFen($input['amount']);
                 $recode->status = RechangeConst::RECHANGE_ACTION_STATUCT_ING;
                 $recode->ip = \helper::getClientIp();

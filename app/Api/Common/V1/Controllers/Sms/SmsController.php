@@ -17,7 +17,7 @@ use library\Service\Sms\Sms;
 
 class SmsController extends Controller{
 
-    public function smsSend(){
+    public function smsSend() {
         $sms = Sms::getInstance();
         Log::info(json_encode(Input::all()));
         //判断手机号

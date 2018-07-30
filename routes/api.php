@@ -13,10 +13,8 @@ use Illuminate\Http\Request;
 |
 */
 require 'api/merchant/merchant.php';
+require 'api/merchant/pay/rechange.php';
 require 'api/authapi.php';
-require 'api/pay/merchant/pay.php';
 require 'api/common/sms/sms.php';
-require 'api/common/upload.php';
 require 'api/common/area.php';
-require 'api/common/speech.php';
 require 'api/panorama/panorama.php';
