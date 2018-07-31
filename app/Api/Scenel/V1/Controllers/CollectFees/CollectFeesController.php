@@ -7,7 +7,7 @@
  */
 namespace  App\api\Scenel\V1\Controllers\CollectFees;
 use App\Api\BaseController;
-use App\Api\Common\V1\Bls\ScenelCollFrees\Model\ScenelCollectModel;
+use App\Api\Common\V1\Bls\Model\ScenelCollFrees\ScenelCollectModel;
 use App\Api\Merchant\V1\Bls\Model\AccountModel;
 use App\Api\Merchant\V1\Bls\Model\SceneCollFressModel;
 use App\Api\Merchant\V1\Bls\Model\ScenelCollFreesRcordModel;
