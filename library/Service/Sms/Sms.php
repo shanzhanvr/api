@@ -8,7 +8,6 @@
  */
 namespace library\Service\Sms;
 use library\Service\Contst\Sms\SmsConst;
-use Mockery\Exception;
 
 /**
  * 发送短信

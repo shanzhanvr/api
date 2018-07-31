@@ -67,7 +67,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            'model' => App\Api\Merchant\V1\Bls\Model\MerchantModel::class,
         ],
 
         // 'users' => [

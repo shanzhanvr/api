@@ -18,3 +18,4 @@ require 'api/authapi.php';
 require 'api/common/sms/sms.php';
 require 'api/common/area.php';
 require 'api/panorama/panorama.php';
+require  'api/merchant/pay/collfrees.php';

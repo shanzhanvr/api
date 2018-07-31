@@ -35,12 +35,4 @@ class MerchantModel extends BaseModel implements AuthenticatableContract,Authori
     public function account(){
         return $this->hasOne(AccountModel::class,'merchantId');
     }
-
-    public function authDatum(){
-        if($this->customertype == UserTypeConst::PERSONTYPE){
-            return $this->hasOne(PersonauthModel::class, 'merchantId','id');
-        }else if($this->customertype == UserTypeConst::COMPANYTYPE){
-            return $this->hasOne(CompanyauthModel::class, 'merchantId','id');
-        }
-    }
 }

@@ -161,8 +161,8 @@ class helper {
      * $type : 1 年 2 月
      * $num 值
      * */
-    public static function getNextTime($type = 1,$num = 1){
-        $nowtime = date('Y-m-d H:i:s');
+    public static function getNextTime($type = 1,$num = 1,$date=''){
+        $nowtime = !empty($date) ? $date : date('Y-m-d H:i:s');
         if($type == 1){
             return date("Y-m-d H:i:s",strtotime("+".$num."years",strtotime($nowtime)));
         }elseif($type == 2){
