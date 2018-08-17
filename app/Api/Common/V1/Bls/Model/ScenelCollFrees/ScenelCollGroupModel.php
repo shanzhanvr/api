@@ -7,7 +7,8 @@
  */
 namespace App\Api\Common\V1\Bls\ScenelCollFrees\Model;
 
-use App\Api\Scenel\V1\Bls\Model\BaseModel;
+
+use App\Api\Common\V1\Bls\Model\BaseModel;
 
 class ScenelCollGroupModel extends BaseModel
 {

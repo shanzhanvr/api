@@ -49,7 +49,9 @@ class BaseController extends Controller {
     public function compareAmount($amount,$amount2){
         return bccomp(abs($amount),abs($amount2));
     }
-
+    public static  function getBcmulAmount($amount,$multiple){
+        return bcmul($amount,$multiple);
+    }
     /**
      * 格式化金额
      *
