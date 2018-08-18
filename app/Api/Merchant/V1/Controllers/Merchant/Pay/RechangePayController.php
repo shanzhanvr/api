@@ -53,7 +53,6 @@ class RechangePayController extends BaseController {
             return JsonResponse::error(0, '验证失败', $validator->errors()->toArray());
         }
         $rechargeType = '';
-        $input['amount'] = '0.01';
         if ($input['rechargeType'] == 1) {
             $rechargeType = PayConst::wechatnative;
         } elseif ($input['rechargeType'] == 2) {
