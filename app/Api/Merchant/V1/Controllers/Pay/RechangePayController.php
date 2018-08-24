@@ -89,6 +89,7 @@ class RechangePayController extends BaseController {
                 $recode->preBlance = $account->blance;
                 $recode->blance = (int)($account->blance + $this->getYuanFromFen($input['amount']));
                 $recode->preAmount = $account->amount;//变动前可提现金额
+                $recode->amount = $account->amount;//变动后可提现金额
                 $recode->tradeaMount = $this->getYuanFromFen($input['amount']);
                 $recode->status = RechangeConst::RECHANGE_ACTION_STATUCT_ING;
                 $recode->ip = \helper::getClientIp();

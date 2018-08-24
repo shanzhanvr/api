@@ -10,6 +10,7 @@ namespace App\Api\Merchant\V1\Controllers\Merchant;
 use App\Api\Merchant\V1\Bls\Model\MerchantModel;
 use App\Api\Merchant\V1\Bls\RechargeBls;
 use App\Api\Merchant\V1\Controllers\BaseController;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Log;
 use JWTAuth,Validator;
@@ -18,7 +19,7 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 
-class MerchantController extends BaseController {
+class AuthController extends BaseController {
 
     public function __construct() {
         parent::__construct();
@@ -81,8 +82,7 @@ class MerchantController extends BaseController {
         }
         $newUser = [
             'mobile' => Input::get('mobile'),
-            'password' => bcrypt(Input::get('password')),
-            'customertype' =>Input::get('customertype')
+            'password' => Hash::make(Input::get('password')),
         ];
         $user = MerchantModel::create($newUser);
         $token = JWTAuth::fromUser($user);
@@ -123,4 +123,5 @@ class MerchantController extends BaseController {
         $recharge = $bls->getRechangeByList($searchData);
         return JsonResponse::success(['object'=>$recharge]);
     }
+
 }

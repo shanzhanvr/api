@@ -10,11 +10,11 @@ $api = app('Dingo\Api\Routing\Router');
 $api->version('v1', function ($api) {
     $api->group(['namespace' => 'App\Api\Merchant\V1\Controllers\Merchant','middleware' => ['api.merchant']],function ($api) {
         //商户登录注册接口无需验证token
-        $api->post('merchant/login', 'MerchantController@login');
-        $api->post('merchant/register', 'MerchantController@register');
+        $api->post('merchant/login', 'AuthController@login');
+        $api->post('merchant/register', 'AuthController@register');
         $api->group(['middleware' => ['before' => 'jwt.auth']], function ($api){//之前验证token
-            $api->get('merchant/getmerchant', 'MerchantController@getMerchantInfo');//获取商户详细信息
-            $api->get('merchant/rechange', 'MerchantController@getRechangeList');//获取商户充值列表
+            $api->get('merchant/getmerchant', 'AuthController@getMerchantInfo');//获取商户详细信息
+            $api->get('merchant/rechange', 'AuthController@getRechangeList');//获取商户充值列表
         });
     });
 });
