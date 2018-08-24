@@ -5,7 +5,7 @@
  * Date: 2018/6/27
  * Time: 17:55
  */
-namespace App\Api\Merchant\V1\Controllers\Merchant\Pay;
+namespace App\Api\Merchant\V1\Controllers\Pay;
 
 use App\Api\BaseController;
 use App\Api\Merchant\V1\Bls\Model\AccountModel;
