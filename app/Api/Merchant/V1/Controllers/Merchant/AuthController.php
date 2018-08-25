@@ -7,6 +7,7 @@
  */
 namespace App\Api\Merchant\V1\Controllers\Merchant;
 
+use App\Api\Merchant\V1\Bls\Model\AccountModel;
 use App\Api\Merchant\V1\Bls\Model\MerchantModel;
 use App\Api\Merchant\V1\Bls\RechargeBls;
 use App\Api\Merchant\V1\Controllers\BaseController;
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Log;
 use JWTAuth,Validator;
 use library\Response\JsonResponse;
+use library\Service\Contst\Common\StatusConst;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
@@ -32,15 +34,12 @@ class AuthController extends BaseController {
     protected $storeValidateRule = [
         'mobile'     => 'required|Numeric|unique:merchant,mobile',
         'password'   => 'required',
-        'customertype'=> 'required|Numeric',
     ];
     protected $storeErrorMsg = [
         'mobile.required'              => '登陆账户不能为空',
         'mobile.Numeric'               => '手机号格式不正确',
         'mobile.unique'               => ' 手机号已存在',
         'password.required'            => '密码不能为空',
-        'customertype.required'        => '类型不能为空',
-        'customertype.Numeric'        => '类型只能为数字',
     ];
     protected $errorMsg = [
         'mobile.required'              => '登陆账户不能为空',
@@ -76,15 +75,20 @@ class AuthController extends BaseController {
      *
      * */
     public function register() {
+        Log::info(json_encode(Input::all()));
         $validator = Validator::make(Input::all(),$this->storeValidateRule,$this->storeErrorMsg);
+        Log::info(json_encode(Input::all()));
+        $input = Input::all();
         if($validator->fails()){
             return $this->error('0','验证失败',$validator->errors()->toArray());
         }
         $newUser = [
             'mobile' => Input::get('mobile'),
-            'password' => Hash::make(Input::get('password')),
+            'password' => Hash::make(Input::get('password').Input::get('mobile')),
+            'agentId'  =>isset($input['agentId']) && !empty($input['agentId']) ? $input['agentId']: 0,
         ];
         $user = MerchantModel::create($newUser);
+        AccountModel::create(['merchantId'=>$user->id,'blance'=>env('defautl_RECHANGE_FLICKER_AMOUNT') ,'amount'=>'0','status'=>StatusConst::ENABLED,'ip'=>\helper::getClientIp()]);
         $token = JWTAuth::fromUser($user);
         return JsonResponse::success(['access_token'=>$token]);
     }
