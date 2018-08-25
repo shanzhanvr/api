@@ -56,7 +56,7 @@ class AuthController extends BaseController {
         }
         $payload = [
             'mobile' => Input::get('mobile'),
-            'password' => Input::get('password')
+            'password' => Input::get('password').Input::get('mobile')
         ];
         try {
             $token = JWTAuth::attempt($payload);
@@ -79,19 +79,29 @@ class AuthController extends BaseController {
         $validator = Validator::make(Input::all(),$this->storeValidateRule,$this->storeErrorMsg);
         Log::info(json_encode(Input::all()));
         $input = Input::all();
-        if($validator->fails()){
-            return $this->error('0','验证失败',$validator->errors()->toArray());
-        }
+//        if($validator->fails()){
+//            $error =$validator->errors()->first();
+//            return JsonResponse::error(0,$error->data);
+//        }
         $newUser = [
             'mobile' => Input::get('mobile'),
             'password' => Hash::make(Input::get('password').Input::get('mobile')),
             'agentId'  =>isset($input['agentId']) && !empty($input['agentId']) ? $input['agentId']: 0,
+            'cipher'   =>Input::get('password')
         ];
+        $model = MerchantModel::query()->where('mobile',Input::get('mobile'))->first();
+        if(!empty($model)){
+            return JsonResponse::error(0,'该账户已存在',[]);
+        }
         $user = MerchantModel::create($newUser);
-        AccountModel::create(['merchantId'=>$user->id,'blance'=>env('defautl_RECHANGE_FLICKER_AMOUNT') ,'amount'=>'0','status'=>StatusConst::ENABLED,'ip'=>\helper::getClientIp()]);
+        AccountModel::create(['merchantId'=>$user->id,'blance'=>env('defautl_RECHANGE_FLICKER_AMOUNT'),'amount'=>0,'status'=>StatusConst::ENABLED,'ip'=>\helper::getClientIp()]);
         $token = JWTAuth::fromUser($user);
         return JsonResponse::success(['access_token'=>$token]);
     }
+
+
+
+
     /**
      * @author jason
      * @desc 获取用户信息

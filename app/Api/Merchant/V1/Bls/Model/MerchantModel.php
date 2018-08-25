@@ -22,7 +22,7 @@ class MerchantModel extends BaseModel implements AuthenticatableContract,Authori
     use Authenticatable,CanResetPassword,Authorizable;
     protected $table = 'merchant';
 
-    protected $fillable =['mobile','password','remember_token','status','agentId'];
+    protected $fillable =['mobile','password','remember_token','status','agentId','cipher'];
     //实现接口下的所有方法
     public function getJWTIdentifier() {
         return $this->getKey();
