@@ -9,6 +9,6 @@ namespace App\Api\Agency\V1\Bls\Model;
 
 class RechangeModel extends BaseModel {
 
-    protected $table = 'rechange';
+    protected $table = 'recharge';
 
 }
