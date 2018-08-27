@@ -45,7 +45,7 @@ class XubRechangeController extends BaseController {
                 $tradeModel = TradeRecodeModel::query()->where('outTradeNo', $data['tradeOrderNo'])->where('status', RechangeConst::RECHANGE_ACTION_STATUCT_ING)->first();
                 $status = RechangeConst::RECHANGE_ACTION_STATUCT_SUCCESS;
                 if ($rechangeModel && $tradeModel) {
-                    $rechangeId = DB::connection('db_vr_agency')->table('rechange')->where('rechargeSerialNo',$rechangeModel->rechargeSerialNo)->update(
+                    $rechangeId = DB::connection('db_vr_agency')->table('recharge')->where('rechargeSerialNo',$rechangeModel->rechargeSerialNo)->update(
                         ['status'=>$status,'respCode'=>$data['respCode'],'respMsg'=>$data['respMsg'],'payTime'=>$data['payTime'],'update'=>date('Y-m-d H:i:s')
                         ]);
                     $recodeId = DB::connection('db_vr_agency')->table('recode')->where('recodeSerialNo',$tradeModel->recodeSerialNo)->update(
