@@ -6,7 +6,7 @@
  * Time: 14:48
  */
 
-namespace App\Api\Merchant\V1\Controllers\Pay;
+namespace App\Api\Agency\V1\Controllers\Pay;
 
 use App\Api\Agency\V1\Bls\Model\AccountModel;
 use App\Api\Agency\V1\Bls\Model\RechangeModel;
@@ -15,12 +15,17 @@ use App\Api\BaseController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use library\Service\Contst\Common\RechangeConst;
+use library\Service\Log\BLog;
 use library\Service\Pay\Apply;
 use library\Service\Pay\Tools\Aes;
 use library\Service\Pay\Tools\Rsa;
 
 class XubRechangeController extends BaseController {
 
+    protected $blog;
+    public function __construct(){
+        $this->blog = BLog::get_instance();
+    }
     //支付回调接口
     public function receivePay(){
     $responseData = file_get_contents('php://input');
