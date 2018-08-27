@@ -46,14 +46,14 @@ class XubRechangeController extends BaseController {
                 $status = RechangeConst::RECHANGE_ACTION_STATUCT_SUCCESS;
                 if ($rechangeModel && $tradeModel) {
                     $rechangeId = DB::connection('db_vr_agency')->table('recharge')->where('rechargeSerialNo',$rechangeModel->rechargeSerialNo)->update(
-                        ['status'=>$status,'respCode'=>$data['respCode'],'respMsg'=>$data['respMsg'],'payTime'=>$data['payTime'],'update'=>date('Y-m-d H:i:s')
+                        ['status'=>$status,'respCode'=>$data['respCode'],'respMsg'=>$data['respMsg'],'payTime'=>$data['payTime'],'update_at'=>date('Y-m-d H:i:s')
                         ]);
                     $recodeId = DB::connection('db_vr_agency')->table('recode')->where('recodeSerialNo',$tradeModel->recodeSerialNo)->update(
-                        ['status'=>$status,'respCode'=>$data['respCode'],'respMsg'=>$data['respMsg'],'payTime'=>$data['payTime'],'update'=>date('Y-m-d H:i:s')
+                        ['status'=>$status,'respCode'=>$data['respCode'],'respMsg'=>$data['respMsg'],'payTime'=>$data['payTime'],'update_at'=>date('Y-m-d H:i:s')
                         ]);
                     $accountModel = AccountModel::find($rechangeModel->accountId);
                     $accountId = DB::connection('db_vr_agency')->table('account')->where('id',$accountModel->id)->update(
-                        ['blance'=>$this->getSumamount($this->getYuanFromFen($data['amount']), $accountModel->blance),'update'=>date('Y-m-d H:i:s')
+                        ['blance'=>$this->getSumamount($this->getYuanFromFen($data['amount']), $accountModel->blance),'update_at'=>date('Y-m-d H:i:s')
                         ]);
                     if($rechangeId && $recodeId && $accountId){
                         DB::connection('db_vr_agency')->commit();
