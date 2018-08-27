@@ -24,10 +24,10 @@ class Apply {
     public static $privateKeyFile;
     public static $xtbPriKey;
 
-    public function __construct(){
+    public function __construct($norifyurl = ''){
         self::$appId= env('LEARNING_PAYAPPID');
         self::$strKey = env('LEARNING_PAYAPP_SERECTKEY');
-        self::$notifyUrl = env('LEARNING_PAYAPP_NOTIFY');
+        self::$notifyUrl = $norifyurl;
         self::$callback =  env('LEARNING_PAYAPPPAY_FRONTJUMPURL');;
         self::$unfiledurl = env('LEARNING_UNIFIED_PAYURL');
         self::$privateKey = file_get_contents(realpath(str_replace('public','',getcwd()).'/library' ).'/cert/xuetongbao/merchant_private_key.pem');

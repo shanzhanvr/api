@@ -114,7 +114,7 @@ class RechangePayController extends BaseController {
         if (!empty($responseData)) {
             $responseData = json_decode($responseData, true);
             if (isset($responseData['appId']) && env('LEARNING_PAYAPPID') == $responseData['appId']) {
-                $applyPay = new Apply();
+                $applyPay = new Apply(env('LEARNING_PAYAPP_NOTIFY'));
                 $aesKey = Rsa::privateDecrypt($responseData['encryptKey'], $applyPay::$privateKey);
                 $data = Aes::opensslDecrypt($responseData['encryptData'], $aesKey);
                 $this->blog->log('receivepay','支付接口回调解密后的报文:' . $data);
