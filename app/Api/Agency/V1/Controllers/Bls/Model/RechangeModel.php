@@ -6,9 +6,8 @@
  * Time: 14:55
  */
 namespace App\Api\Agency\V1\Bls\Model;
-use Illuminate\Database\Eloquent\Model;
 
-class RechangeModel extends Model{
+class RechangeModel extends BaseModel {
 
     protected $table = 'rechange';
 

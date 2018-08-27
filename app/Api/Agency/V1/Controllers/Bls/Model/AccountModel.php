@@ -7,9 +7,8 @@
  */
 
 namespace App\Api\Agency\V1\Bls\Model;
-use Illuminate\Database\Eloquent\Model;
 
-class AccountModel extends Model{
+class AccountModel extends BaseModel{
 
     protected $table = 'account';
 
