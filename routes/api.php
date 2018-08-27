@@ -19,3 +19,4 @@ require 'api/common/sms/sms.php';
 require 'api/common/area.php';
 require 'api/panorama/panorama.php';
 require  'api/pay/flicker/collfrees.php';
+require  'api/agency/route.php';
