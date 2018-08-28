@@ -1,12 +1,20 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: Jason
+ * Date: 2018/8/28
+ * Time: 10:57
+ */
 
 $api = app('Dingo\Api\Routing\Router');
 $api->version('v1', function ($api) {
-    $api->group(['namespace' => 'App\Api\Agency\V1\Controllers\Pay','middleware' => ['api.agency']],function ($api) {
-        $api->POST('agency/pay/receiver', 'XubRechangeController@receivePay');//支付回调
-        $api->group(['middleware' => ['before' => 'jwt.auth']], function ($api){
-            $api->POST('agency/pay/receivefront', 'RechangePayController@checkOrder');//检查支付订单
-            $api->POST('agency/pay/unified', 'RechangePayController@alipayPay');//下单
+    $api->group(['namespace' => 'App\Api\Agency\V1\Controllers\Auth','middleware' => ['api.agency']],function ($api) {
+        //商户登录注册接口无需验证token
+        $api->post('agency/auth/login', 'AuthController@login');
+        $api->post('agency/auth/register', 'AuthController@register');
+        $api->group(['middleware' => ['before' => 'jwt.auth']], function ($api){//之前验证token
+            $api->post('agency/auth/users', 'AuthController@getUsers');
+
         });
     });
 });

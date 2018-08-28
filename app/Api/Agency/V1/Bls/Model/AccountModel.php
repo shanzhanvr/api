@@ -12,4 +12,6 @@ class AccountModel extends BaseModel{
 
     protected $table = 'account';
 
+    protected $fillable = ['agentId','blance','amount'];
+
 }

@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
 require 'api/merchant/merchant.php';
 require 'api/merchant/pay/rechange.php';
 require 'api/authapi.php';
@@ -19,4 +20,5 @@ require 'api/common/sms/sms.php';
 require 'api/common/area.php';
 require 'api/panorama/panorama.php';
 require  'api/pay/flicker/collfrees.php';
+require  'api/agency/rechange/route.php';
 require  'api/agency/route.php';

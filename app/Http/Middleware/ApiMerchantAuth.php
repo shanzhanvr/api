@@ -12,9 +12,9 @@ class ApiMerchantAuth {
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next) {
-        config(['jwt.user' => '\App\Api\Merchant\V1\Bls\Model\MerchantModel']);    //重要用于指定特定model
-        config(['auth.providers.users.model' => \App\Api\Merchant\V1\Bls\Model\MerchantModel::class]);//重要用于指定特定model！！！！
-        return $next($request);
-    }
+//    public function handle($request, Closure $next) {
+//        config(['jwt.user' => '\App\Api\Merchant\V1\Bls\Model\MerchantModel']);    //重要用于指定特定model
+//        config(['auth.providers.users.model' => \App\Api\Merchant\V1\Bls\Model\MerchantModel::class]);//重要用于指定特定model！！！！
+//        return $next($request);
+//    }
 }

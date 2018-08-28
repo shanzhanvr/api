@@ -75,14 +75,7 @@ class AuthController extends BaseController {
      *
      * */
     public function register() {
-        Log::info(json_encode(Input::all()));
-        $validator = Validator::make(Input::all(),$this->storeValidateRule,$this->storeErrorMsg);
-        Log::info(json_encode(Input::all()));
         $input = Input::all();
-//        if($validator->fails()){
-//            $error =$validator->errors()->first();
-//            return JsonResponse::error(0,$error->data);
-//        }
         $newUser = [
             'mobile' => Input::get('mobile'),
             'password' => Hash::make(Input::get('password').Input::get('mobile')),
